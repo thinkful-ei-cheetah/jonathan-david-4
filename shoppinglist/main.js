@@ -8,8 +8,9 @@ let shoppingitems = [];
 $(function () {
     $('#js-shopping-list-form').submit(event => {
         event.preventDefault();
-        const item_name = $('input#shopping-list-entry').val();
 
+        const item_name = $('input#shopping-list-entry').val();
+        $('input#shopping-list-entry').val('');
         const itemHtml = `<li>
         <span class="shopping-item">${item_name}</span>
         <div class="shopping-item-controls">
@@ -34,19 +35,17 @@ $(function () {
 
 
         console.log(event.currentTarget.outerText)
+        $( this ).parent().siblings().removeClass('shopping-item__checked');
+       
+        
+        if (event.currentTarget.outerText==='check')
+        {
+            $( this ).parent().siblings().addClass('shopping-item__checked');
+        } else{
+            $( this ).parent().siblings().removeClass('shopping-item__checked');
 
-    
-        $( this ).toggleClass(function() {
-
-            if (event.currentTarget.outerText==='check')
-            {
-                return ".shopping-item.shopping-item__checked";
-            } else{
-                return "";
-            }
-
-          });
-
+            
+        }
           if (event.currentTarget.outerText==='check')
           {
             $( this ).text('uncheck');
@@ -54,14 +53,7 @@ $(function () {
           {
             $( this ).text('check');
           }
-          
 
-
-
-      //  console.log( $( this ));
-        console.log($( this ).parent().siblings().addClass('shopping-item__checked') );
-        
-       
       });
 });
 
